@@ -9,7 +9,14 @@
     include('header.php');
     $Recettes = null;
     require('../Donnees.inc.php');
-    echo($Recettes[1]["titre"]);
 ?>
+
+<ul>
+    <?php
+    for ($i = 0; $i < count($Recettes); $i++){
+        echo ("<li>".$Recettes[$i]["titre"]."</li>");
+    }
+    ?>
+</ul>
 </body>
 </html>
