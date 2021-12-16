@@ -50,6 +50,20 @@ if (!$connBd) {
     }
 }
 
+$Recettes = null;
+require('Donnees.inc.php');
+
+for ($i = 0; $i < count($Recettes); $i++){
+    $id = $i;
+    $aled = mysqli_query($conn, "SELECT 1 FROM toddscocktail_boissons.recettes WHERE id_recette = ".$id);
+    if ($aled->fetch_row() == null) {
+        $titre = mysqli_real_escape_string($conn, $Recettes[$id]['titre']);
+        $ingredients = mysqli_real_escape_string($conn, $Recettes[$id]['ingredients']);
+        $preparation = mysqli_real_escape_string($conn, $Recettes[$id]['preparation']);
+        mysqli_query($conn, "INSERT INTO recettes(id_recette, titre, ingredients, preparation) VALUES ('$id', '$titre', '$ingredients', '$preparation')");
+    }
+}
+
 $nomRecette = mysqli_query($conn, "SELECT titre FROM recettes;");
 if ($nomRecette) {
     while ($row = mysqli_fetch_row($nomRecette)) {
