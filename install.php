@@ -22,56 +22,37 @@ $conn = new mysqli($servername, $username, $password);
 //On vérifie la connexion
 if($conn->connect_error){
     die('Erreur : ' .$conn->connect_error);
-} else {
-    echo 'Connexion réussie'.'<br>';
 }
 
 $connBd = mysqli_select_db($conn, $database);
 
 if (!$connBd) {
-    if (mysqli_query($conn, "CREATE DATABASE toddscocktail_boissons")) {
-        echo 'Base de donnees crée'.'<br>';
-    } else {
-        echo 'Erreur lors de la création bd'.'<br>';
-    }
-} else {
-    echo "Connecté à la bd".'<br>';
+    mysqli_query($conn, "CREATE DATABASE toddscocktail_boissons");
 
-    if (mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.recettes (id_recette INT PRIMARY KEY, titre TEXT, ingredients TEXT, preparation TEXT);")) {
-        echo "recette ok".'<br>';
-    } else {
-        echo 'recette fail'.'<br>';
-    }
+    mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.recettes (id_recette INT PRIMARY KEY, titre TEXT, ingredients TEXT, preparation TEXT);");
+    mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.ingredients (id_recette INT, id_ingredient INT, nom_ingredient TEXT, PRIMARY KEY (id_recette, id_ingredient), FOREIGN KEY(id_recette) REFERENCES recettes(id_recette));");
 
-    if (mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.ingredients (id_recette INT, id_ingredient INT, nom_ingredient TEXT, PRIMARY KEY (id_recette, id_ingredient), FOREIGN KEY(id_recette) REFERENCES recettes(id_recette));")) {
-        echo "ingredient ok".'<br>';
-    } else {
-        echo 'ingredient fail'.'<br>';
-    }
-}
+    $Recettes = null;
+    require('Donnees.inc.php');
 
-$Recettes = null;
-require('Donnees.inc.php');
-
-for ($i = 0; $i < count($Recettes); $i++){
-    $id = $i;
-    $aled = mysqli_query($conn, "SELECT 1 FROM toddscocktail_boissons.recettes WHERE id_recette = ".$id);
-    if ($aled->fetch_row() == null) {
-        $titre = mysqli_real_escape_string($conn, $Recettes[$id]['titre']);
-        $ingredients = mysqli_real_escape_string($conn, $Recettes[$id]['ingredients']);
-        $preparation = mysqli_real_escape_string($conn, $Recettes[$id]['preparation']);
-        mysqli_query($conn, "INSERT INTO recettes(id_recette, titre, ingredients, preparation) VALUES ('$id', '$titre', '$ingredients', '$preparation')");
+    for ($i = 0; $i < count($Recettes); $i++){
+        $id = $i;
+        $aled = mysqli_query($conn, "SELECT 1 FROM recettes WHERE id_recette = ".$id);
+        if ($aled->fetch_row() == null) {
+            $titre = mysqli_real_escape_string($conn, $Recettes[$id]['titre']);
+            $ingredients = mysqli_real_escape_string($conn, $Recettes[$id]['ingredients']);
+            $preparation = mysqli_real_escape_string($conn, $Recettes[$id]['preparation']);
+            mysqli_query($conn, "INSERT INTO recettes(id_recette, titre, ingredients, preparation) VALUES ('$id', '$titre', '$ingredients', '$preparation')");
+        }
+        for ($j = 0; $j < count($Recettes[$i]['index']); $j++) {
+            if (mysqli_query($conn, "SELECT 1 FROM ingredients WHERE id_recette = '$id' AND id_ingredient = '$j'")->fetch_row() == null) {
+                $nom = mysqli_real_escape_string($conn, $Recettes[$i]['index'][$j]);
+                mysqli_query($conn, "INSERT INTO ingredients(id_recette, id_ingredient, nom_ingredient) VALUES ('$i', '$j', '$nom')");
+            }
+        }
     }
 }
 
-$nomRecette = mysqli_query($conn, "SELECT titre FROM recettes;");
-if ($nomRecette) {
-    while ($row = mysqli_fetch_row($nomRecette)) {
-        echo $row[0] . '<br>';
-    }
-} else {
-    echo 'Erreur lors de la requete'.'<br>';
-}
 ?>
 </body>
 </html>
