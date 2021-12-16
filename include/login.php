@@ -1,3 +1,7 @@
+<?php
+/*http://www.codeurjava.com/2016/12/formulaire-de-login-avec-html-css-php-et-mysql.html
+https://waytolearnx.com/2020/01/formulaire-dauthentification-login-mot-de-passe-avec-php-et-mysql.html
+ */?>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
