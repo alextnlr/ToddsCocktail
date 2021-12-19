@@ -53,6 +53,7 @@ if (!$connBd) {
     }
 }
 
+}
 ?>
 </body>
 </html>
