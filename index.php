@@ -6,7 +6,7 @@
 </head>
 <body>
 <?php
-include('include/header.php'); ?>
+include('header.php'); ?>
 
 <?php
 session_start();
