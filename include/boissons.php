@@ -33,8 +33,26 @@ $stmt->bind_param("s", $nom); // passage du paramètre
 $stmt->execute(); //Execution de la requête
 $result = $stmt->get_result()->fetch_row(); // récupération du résultat
 
-printf("%s, %s\n", $result[0], $result[1]);
 
+$ingredient = explode("|", $result[0]);
+$preparation = explode(".", $result[1]);
 ?>
+<p>Ingrédients nécessaires :</p>
+<ul>
+    <?php
+    foreach($ingredient as $i){
+        echo "<li>$i</li>";
+    }
+    ?>
+
+</ul>
+
+<p>Préparations :</p>
+<ol>
+    <?php
+    echo $result[1];
+    ?>
+
+</ol>
 </body>
 </html>
