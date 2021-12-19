@@ -14,7 +14,11 @@
 <ul>
     <?php
     for ($i = 0; $i < count($Recettes); $i++){
-        echo ("<li>".$Recettes[$i]["titre"]."</li>");
+        $nom = $Recettes[$i]["titre"];
+
+        //Remplacement des espaces par des underscores pour pouvoir les passer en paramètres
+        $changenom = str_replace(' ', '_', $nom);
+        echo "<a href="."boissons.php"."?nom=".$changenom."> <li>".$nom."</li></a>";
     }
     ?>
 </ul>
