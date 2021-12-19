@@ -16,6 +16,9 @@ $database = 'toddscocktail_boissons';
 
 $nom = str_replace('_', ' ', $_GET['nom']);
 
+if (file_exists("../images/".$_GET['nom'].".jpg")){
+    echo "<img  src=../images/".$_GET['nom'].".jpg>";
+}
 
 //On établit la connexion
 $conn = new mysqli($servername, $username, $password);
