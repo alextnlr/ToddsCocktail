@@ -1,8 +1,3 @@
-<?php
-/*http://www.codeurjava.com/2016/12/formulaire-de-login-avec-html-css-php-et-mysql.html
-https://waytolearnx.com/2020/01/formulaire-dauthentification-login-mot-de-passe-avec-php-et-mysql.html
- */?>
-<html lang="fr">
 <head>
     <meta charset="utf-8">
     <!-- importer le fichier de style -->
@@ -10,9 +5,8 @@ https://waytolearnx.com/2020/01/formulaire-dauthentification-login-mot-de-passe-
 </head>
 <body>
 <div id="container">
-    <!-- zone de connexion -->
 
-    <form action="veriflogin.php" method="POST">
+    <form action="register.php" method="POST">
         <h1>Connexion</h1>
 
         <label><b>Nom d'utilisateur</b></label>
@@ -21,7 +15,7 @@ https://waytolearnx.com/2020/01/formulaire-dauthentification-login-mot-de-passe-
         <label><b>Mot de passe</b></label>
         <input type="password" placeholder="Entrer le mot de passe" name="password" required>
 
-        <input type="submit" id='submit' value='LOGIN' >
+        <input type="submit" id='submit' value='REGISTER' >
         <?php
         require("install.php");
 

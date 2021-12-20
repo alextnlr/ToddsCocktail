@@ -54,6 +54,13 @@ if (!$connBd) {
     }
 }
 
+function addCompte($login, $mdp) {
+
+}
+
+function checkCompte($login) {
+
+}
 ?>
 </body>
 </html>
