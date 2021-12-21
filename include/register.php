@@ -22,6 +22,9 @@
             $err = $_GET['erreur'];
             if($err==2)
                 echo "<p style='color:red'>Le nom d'utilisateur existe dèjà</p>";
+            else if($err == 1) {
+                echo "<p style='color:red'>Nom d'utilisateur et mot de passe nécessaire</p>";
+            }
         }
 
         // A supprimer plus tard, sert juste de test

@@ -31,7 +31,7 @@ https://waytolearnx.com/2020/01/formulaire-dauthentification-login-mot-de-passe-
 
         // A supprimer plus tard, sert juste de test
         if(isset($_GET['result']) && $_GET['result'] == 1){
-            echo "<p> Connecté </p>";
+            echo "<p> Compte créé </p>";
         }
         ?>
     </form>
