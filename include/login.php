@@ -23,8 +23,6 @@ https://waytolearnx.com/2020/01/formulaire-dauthentification-login-mot-de-passe-
 
         <input type="submit" id='submit' value='LOGIN' >
         <?php
-        require("install.php");
-
         if(isset($_GET['erreur'])){
             $err = $_GET['erreur'];
             if($err==1 || $err==2)

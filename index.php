@@ -17,6 +17,8 @@ if ($_SESSION['username'] != "") {
     echo "<a href='include/logout.php'> Déconnexion </a>";
 }else{
     echo "<a href='include/login.php'> Connexion </a>";
+    echo ' ou ';
+    echo "<a href='include/register.php'> Créer un compte </a>";
 }
 ?>
 

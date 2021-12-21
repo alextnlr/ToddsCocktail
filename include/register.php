@@ -6,8 +6,8 @@
 <body>
 <div id="container">
 
-    <form action="register.php" method="POST">
-        <h1>Connexion</h1>
+    <form action="verifRegister.php" method="POST">
+        <h1>Création de compte</h1>
 
         <label><b>Nom d'utilisateur</b></label>
         <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
@@ -16,18 +16,17 @@
         <input type="password" placeholder="Entrer le mot de passe" name="password" required>
 
         <input type="submit" id='submit' value='REGISTER' >
-        <?php
-        require("install.php");
 
+        <?php
         if(isset($_GET['erreur'])){
             $err = $_GET['erreur'];
-            if($err==1 || $err==2)
-                echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
+            if($err==2)
+                echo "<p style='color:red'>Le nom d'utilisateur existe dèjà</p>";
         }
 
         // A supprimer plus tard, sert juste de test
         if(isset($_GET['result']) && $_GET['result'] == 1){
-            echo "<p> Connecté </p>";
+            echo "<p> Compte créé </p>";
         }
         ?>
     </form>
