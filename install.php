@@ -14,6 +14,10 @@ if($conn->connect_error){
 
 $connBd = mysqli_select_db($conn, $database);
 
+$Hierarchie = null;
+$Recettes = null;
+include 'Donnees.inc.php';
+
 if (!$connBd) {
     mysqli_query($conn, "CREATE DATABASE toddscocktail_boissons");
 
@@ -21,9 +25,7 @@ if (!$connBd) {
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.ingredients (id_recette INT, id_ingredient INT, nom_ingredient TEXT, PRIMARY KEY (id_recette, id_ingredient), FOREIGN KEY(id_recette) REFERENCES recettes(id_recette));");
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.adressePostale (id_adresse INT PRIMARY KEY, adresse TEXT NOT NULL, codePostal NUMBER(5) NOT NULL, ville TEXT NOT NULL)");
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.comptes (login TEXT PRIMARY KEY, mdp TEXT NOT NULL, nom TEXT, prenom TEXT, nom TEXT, sexe NUMBER(1), mail TEXT, dateNaissance TEXT, id_adresse INT, tel NUMBER(10))");
-
-    $Recettes = null;
-    require('Donnees.inc.php');
+    mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.hierarchy (ingredient VARCHAR(50), sous_categorie VARCHAR(50), PRIMARY KEY (ingredient, sous_categorie));");
 
     for ($i = 0; $i < count($Recettes); $i++){
         $id = $i;
@@ -40,5 +42,22 @@ if (!$connBd) {
                 mysqli_query($conn, "INSERT INTO ingredients(id_recette, id_ingredient, nom_ingredient) VALUES ('$i', '$j', '$nom')");
             }
         }
+    }
+
+    $HierarKey = array_keys($Hierarchie);
+    for ($i = 0; $i < count($Hierarchie); $i++) {
+        foreach ($Hierarchie[$HierarKey[$i]]['sous-categorie'] as &$value) {
+            if (mysqli_query($conn, "SELECT 1 FROM toddscocktail_boissons.hierarchy WHERE ingredient = '$HierarKey[$i]' AND sous_categorie = '$value'")->fetch_row() == null) {
+                mysqli_query($conn, "INSERT INTO toddscocktail_boissons.hierarchy(ingredient, sous_categorie) VALUES ('$HierarKey[$i]', '$value')");
+            }
+        }
+
+        foreach ($Hierarchie[$HierarKey[$i]]['super-categorie'] as &$value) {
+            if (mysqli_query($conn, "SELECT 1 FROM toddscocktail_boissons.hierarchy WHERE ingredient = '$value' AND sous_categorie = '$HierarKey[$i]'")->fetch_row() == null) {
+                mysqli_query($conn, "INSERT INTO toddscocktail_boissons.hierarchy(ingredient, sous_categorie) VALUES ('$value', '$HierarKey[$i]')");
+            }
+        }
+
+        unset($value);
     }
 }
