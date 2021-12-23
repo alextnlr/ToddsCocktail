@@ -6,12 +6,7 @@
 </head>
 <body>
 <?php
-$servername = 'mysql-toddscocktail.alwaysdata.net';
-$username = '251063';
-$password = 'BlegTotoTata';
-/*$servername = 'localhost';
-$username = 'root';
-$password = 'root';*/
+require "bddActions.php";
 $database = 'toddscocktail_boissons';
 
 $nom = str_replace('_', ' ', $_GET['nom']);
@@ -21,7 +16,7 @@ if (file_exists("../images/".$_GET['nom'].".jpg")){
 }
 
 //On établit la connexion
-$conn = new mysqli($servername, $username, $password);
+$conn = connectDb();
 
 //On vérifie la connexion
 if($conn->connect_error){
