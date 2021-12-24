@@ -9,17 +9,22 @@
     include('header.php');
     $Recettes = null;
     require('../Donnees.inc.php');
+    require('bddActions.php')
 ?>
 
 <ul>
     <?php
-    for ($i = 0; $i < count($Recettes); $i++){
-        $nom = $Recettes[$i]["titre"];
 
-        //Remplacement des espaces par des underscores pour pouvoir les passer en paramètres
-        $changenom = str_replace(' ', '_', $nom);
-        echo "<a href="."boissons.php"."?nom=".$changenom."> <li>".$nom."</li></a>";
+    $database = 'toddscocktail_boissons';
+    $conn = connectDb();
+    $connBd = mysqli_select_db($conn, $database);
+
+    $query = mysqli_query($conn, "SELECT titre FROM recettes");
+    while ($result = $query->fetch_row()){
+        $changenom = str_replace(' ', '_', $result[0]);
+        echo "<a href="."boissons.php"."?nom=".$changenom."> <li>".$result[0]."</li></a>";
     }
+
     ?>
 </ul>
 </body>

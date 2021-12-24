@@ -9,7 +9,7 @@
 <?php
     include('header.php');
     $Recettes = null;
-    require('../Donnees.inc.php');
+   // require('../Donnees.inc.php');
     require('bddActions.php');
 ?>
 <ul>
