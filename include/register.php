@@ -1,21 +1,37 @@
 <head>
     <meta charset="utf-8">
     <!-- importer le fichier de style -->
-    <link rel="stylesheet" href="../cssmain.css" media="screen" type="text/css" />
+    <link rel="stylesheet" href="../cssmain.css"/>
 </head>
 <body>
 <div id="container">
 
+    <ul>
     <form action="verifRegister.php" method="POST">
         <h1>Création de compte</h1>
 
-        <label><b>Nom d'utilisateur</b></label>
-        <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
+        <li><label><b>Nom d'utilisateur : </b></label>
+            <input type="text" placeholder="Entrer le nom d'utilisateur" name="username" required></li>
 
-        <label><b>Mot de passe</b></label>
-        <input type="password" placeholder="Entrer le mot de passe" name="password" required>
+        <li><label><b>Mot de passe : </b></label>
+            <input type="password" placeholder="Entrer le mot de passe" name="password" required></li>
 
-        <input type="submit" id='submit' value='REGISTER' >
+        <li><label>Nom de Famille : </label>
+            <input type="text" placeholder="Entrer le nom de famille" name="surname" required></li>
+
+        <li><label>Prénom : </label>
+            <input type="text" placeholder="Entrer prenom" name="name" required></li>
+
+        <li><label>Genre : </label>
+        <select name="genre">
+            <option value="homme">Homme</option>
+            <option selected></option>
+            <option value="femme">Femme</option>
+            <option value="autre">Autre</option>
+        </select>
+        </li>
+
+        <li><input type="submit" id='submit' value='REGISTER' ></li>
 
         <?php
         if(isset($_GET['erreur'])){
@@ -33,6 +49,7 @@
         }
         ?>
     </form>
+    </ul>
 </div>
 </body>
 </html>
