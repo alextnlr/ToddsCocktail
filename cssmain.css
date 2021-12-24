@@ -1,5 +1,7 @@
+* {box-sizing: border-box;}
+
 body {
-    color: green;
+    margin: 0;
 }
 
 .menu {
@@ -25,4 +27,8 @@ body {
 .menu a.active {
     background-color: #2196F3;
     color: white;
+}
+
+.menu .compteGestionnaire {
+    float: right;
 }

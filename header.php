@@ -11,16 +11,18 @@
     <a class="active" href="index.php">Accueil</a>
     <a href="listeboissons.php">Liste des Boissons</a>
     <a href="include/listeingredients.php">Liste des Ingrédients</a>
+    <div class="compteGestionnaire">
 <?php
 session_start();
 if ($_SESSION['username'] != "") {
     $user = $_SESSION['username'];
     echo "<a href='include/logout.php'> Déconnexion </a>";
-}else{
+}else {
     echo "<a href='include/login.php'> Connexion </a>";
     echo "<a href='include/register.php'> Créer un compte </a>";
 }
 ?>
+    </div>
 </div>
 <br>
 </body>
