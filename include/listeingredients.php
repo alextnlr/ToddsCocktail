@@ -4,14 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>BlegCocktail - Liste</title>
+    <link rel="stylesheet" href="../cssmain.css">
 </head>
 <body>
+<header>
 <?php
-    include('header.php');
+    include('../header.php');
     $Recettes = null;
    // require('../Donnees.inc.php');
     require('bddActions.php');
 ?>
+</header>
+<main>
+<br>
 <ul>
     <?php
     $database = 'toddscocktail_boissons';
@@ -46,5 +51,6 @@
 
     ?>
 </ul>
+</main>
 </body>
 </html>
