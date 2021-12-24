@@ -8,8 +8,8 @@
 <?php
     include('header.php');
     $Recettes = null;
-    require('../Donnees.inc.php');
-    require('bddActions.php')
+    require('Donnees.inc.php');
+    require('include/bddActions.php')
 ?>
 
 <ul>
