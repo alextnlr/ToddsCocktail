@@ -28,18 +28,21 @@
         $i++;
     }
 
-    $stmt = $conn->prepare("SELECT DISTINCT h.sous_categorie FROM hierarchy h WHERE h.ingredient =?");
-    $stmt->bind_param("s", $niveau_1[0]);
-    $stmt->execute();
-    $query = $stmt->get_result();
-    while ($result = $query->fetch_row()){
-        printf("%s, \n", $result[0]);
-    }
 
+    echo "<ul>";
     for ($i = 0; $i<count($niveau_1); $i++){
-        echo $niveau_1[$i];
-    }
+        echo "<li>".$niveau_1[$i]."</li> <ul>";
+        $stmt = $conn->prepare("SELECT DISTINCT h.sous_categorie FROM hierarchy h WHERE h.ingredient =?");
+        $stmt->bind_param("s", $niveau_1[$i]);
+        $stmt->execute();
+        $query = $stmt->get_result();
+        while ($result = $query->fetch_row()){
+            echo "<li>$result[0]</li>";
+        }
+        echo "</ul>";
 
+    }
+    echo "</ul>";
 
     ?>
 </ul>
