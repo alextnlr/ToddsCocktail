@@ -1,29 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
+    <title>Header</title>
     <meta charset="UTF-8">
-    <title></title>
+    <link type="text/css" rel="stylesheet" href="cssmain.css"/>
 </head>
+
 <body>
 <div class="menu">
-<ul>
-    <li> <a href="index.php">Accueil</a></li>
-    <li><a href="listeboissons.php">Liste des Boissons</a></li>
-    <li><a href="include/listeingredients.php">Liste des Ingrédients</a></li>
+    <a class="active" href="index.php">Accueil</a>
+    <a href="listeboissons.php">Liste des Boissons</a>
+    <a href="include/listeingredients.php">Liste des Ingrédients</a>
 <?php
 session_start();
 if ($_SESSION['username'] != "") {
     $user = $_SESSION['username'];
     // afficher un message
     echo "Bonjour $user, vous êtes connecté";
-    echo "<li><a href='include/logout.php'> Déconnexion </a></li>";
+    echo "<a href='include/logout.php'> Déconnexion </a>";
 }else{
-    echo "<li><a href='include/login.php'> Connexion </a></li>";
-    echo "<li><a href='include/register.php'> Créer un compte </a></li>";
+    echo "<a href='include/login.php'> Connexion </a>";
+    echo "<a href='include/register.php'> Créer un compte </a>";
 }
 ?>
-</ul>
 </div>
 <br>
 </body>
+
 </html>

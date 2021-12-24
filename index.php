@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>BlegCocktail - Accueil</title>
-    <link rel="stylesheet" href="cssmain.css">
+    <link type="text/css" rel="stylesheet" href="cssmain.css"/>
 </head>
 <body>
 <header>
