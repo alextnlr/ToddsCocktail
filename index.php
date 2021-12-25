@@ -12,6 +12,7 @@ include('header.php'); ?>
 </header>
 <main>
 <?php
+require 'install.php';
 //if ($_SESSION['username'] != "") {
 
 //}else{

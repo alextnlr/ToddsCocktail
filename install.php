@@ -26,6 +26,7 @@ if (!$connBd) {
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.adressePostale (id_adresse INT PRIMARY KEY, adresse TEXT NOT NULL, codePostal NUMBER(5) NOT NULL, ville TEXT NOT NULL)");
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.comptes (login TEXT PRIMARY KEY, mdp TEXT NOT NULL, nom TEXT, prenom TEXT, nom TEXT, sexe NUMBER(1), mail TEXT, dateNaissance TEXT, id_adresse INT, tel NUMBER(10))");
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.hierarchy (ingredient VARCHAR(50), sous_categorie VARCHAR(50), PRIMARY KEY (ingredient, sous_categorie));");
+    mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.panier(login VARCHAR(150), id_recette INT, PRIMARY KEY (login, id_recette), FOREIGN KEY (login) REFERENCES comptes(login), FOREIGN KEY (id_recette) REFERENCES recettes(id_recette));");
 
     for ($i = 0; $i < count($Recettes); $i++){
         $id = $i;
