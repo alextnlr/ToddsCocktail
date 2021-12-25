@@ -70,6 +70,25 @@ main {
     font-size: 155%;
 }
 
+.favorite a{
+    font-size: 150%;
+    list-style-type: none;
+    outline: none;
+    text-decoration: none;
+    color: black;
+}
+
+.favorite a:hover{
+    color: #3e4f3a;
+    font-size: 155%;
+}
+
+.favorite a:focus{
+    color: #3e4f3a;
+    font-size: 155%;
+}
+
+
 .ficheBoisson td {
     vertical-align: top;
     padding-right: 50px;

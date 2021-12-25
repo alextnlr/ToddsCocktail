@@ -1,3 +1,9 @@
+<?php
+if (!isset($_COOKIE['favorite'])) {
+    echo "pute";
+    setcookie('favorite', 0);
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
