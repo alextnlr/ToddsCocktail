@@ -69,3 +69,8 @@ main {
     color: #3e4f3a;
     font-size: 155%;
 }
+
+.ficheBoisson td {
+    vertical-align: top;
+    padding-right: 50px;
+}

@@ -16,10 +16,6 @@ $database = 'toddscocktail_boissons';
 
 $nom = str_replace('_', ' ', $_GET['nom']);
 
-if (file_exists("images/".$_GET['nom'].".jpg")){
-    echo "<img  src=images/".$_GET['nom'].".jpg>";
-}
-
 //On établit la connexion
 $conn = connectDb();
 
@@ -41,23 +37,36 @@ $ingredient = explode("|", $result[0]);
 $preparation = explode(".", $result[1]);
 ?>
     <h1><?php echo $nom; ?></h1>
-<p><b>Ingrédients nécessaires :</b></p>
-<ul>
-    <?php
-    foreach($ingredient as $i){
-        echo "<li>$i</li>";
-    }
-    ?>
+    <table class="ficheBoisson">
+        <tr>
+            <td>
+                <p><b>Ingrédients nécessaires :</b></p>
+                <ul>
+                    <?php
+                    foreach($ingredient as $i){
+                        echo "<li>$i</li>";
+                    }
+                    ?>
 
-</ul>
+                </ul>
 
-    <p><b>Préparations :</b></p>
-<ol>
-    <?php
-    echo $result[1];
-    ?>
+                <p><b>Préparations :</b></p>
+                <ol>
+                    <?php
+                    echo $result[1];
+                    ?>
+                </ol>
+            </td>
 
-</ol>
+            <td>
+                <?php if (file_exists("images/".$_GET['nom'].".jpg")){
+                    echo "<img  src=images/".$_GET['nom'].".jpg>";
+                }?>
+            </td>
+        </tr>
+    </table>
+
+
 </main>
 </body>
 </html>
