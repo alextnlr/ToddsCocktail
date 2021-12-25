@@ -44,6 +44,14 @@ html{
     background-color: #EAEAEA;
 }
 
+main {
+    margin: 50px;
+}
+
+.searchArea input {
+    font-size: larger;
+}
+
 .listeboissons a{
     font-size: 150%;
     list-style-type: none;

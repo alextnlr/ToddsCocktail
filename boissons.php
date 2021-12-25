@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>BlegCocktail - Liste</title>
+    <link type="text/css" rel="stylesheet" href="cssmain.css"/>
 </head>
 <body>
+<header>
+    <?php include 'header.php'?>
+</header>
+<main>
 <?php
 require "include/bddActions.php";
 $database = 'toddscocktail_boissons';
@@ -35,7 +40,8 @@ $result = $stmt->get_result()->fetch_row(); // récupération du résultat
 $ingredient = explode("|", $result[0]);
 $preparation = explode(".", $result[1]);
 ?>
-<p>Ingrédients nécessaires :</p>
+    <h1><?php echo $nom; ?></h1>
+<p><b>Ingrédients nécessaires :</b></p>
 <ul>
     <?php
     foreach($ingredient as $i){
@@ -45,12 +51,13 @@ $preparation = explode(".", $result[1]);
 
 </ul>
 
-<p>Préparations :</p>
+    <p><b>Préparations :</b></p>
 <ol>
     <?php
     echo $result[1];
     ?>
 
 </ol>
+</main>
 </body>
 </html>

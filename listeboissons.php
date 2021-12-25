@@ -6,15 +6,20 @@
 
 </head>
 <body>
+
+<header>
+    <?php include('header.php');?>
+</header>
+
+<main>
 <?php
-    include('header.php');
     $Recettes = null;
     require('Donnees.inc.php');
     require('include/bddActions.php')
 ?>
 
 <form action="" method="get" name="searchbar">
-    <table>
+    <table class="searchArea">
         <tr>
             <td><input type="text" name="k" placeholder="Search..." autocomplete="off"></td>
             <td><input type="submit" name="" value="Search"></td>
@@ -43,20 +48,33 @@
 
         //Requete et affichage
         $query = mysqli_query($conn, $queryRequest);
-        while ($result = $query->fetch_row()) {
-            $changenom = str_replace(' ', '_', $result[0]);
-            echo "<a href=" . "boissons.php" . "?nom=" . $changenom . "> <li>" . $result[0] . "</li></a>";
+        if ($query->num_rows > 0) {
+            echo '<div> <b><u>'.$query->num_rows.'</u></b> résultats trouvés </div> <br/>';
+            echo '<table class="search">';
+            while ($result = $query->fetch_row()) {
+                $changenom = str_replace(' ', '_', $result[0]);
+                echo '<tr> <td> <a href="boissons.php?nom='.$changenom.'">'.$result[0].'</a></td>
+                    <td> <button class="panier" type="button">Ajouter au panier</button> </td> </tr>';
+            }
+            echo '</table>';
+        } else {
+            echo "Aucun résultat trouvé";
         }
+        $query->close();
     } else {
         $query = mysqli_query($conn, "SELECT titre FROM recettes");
+        echo '<table class="search">';
         while ($result = $query->fetch_row()) {
             $changenom = str_replace(' ', '_', $result[0]);
-            echo "<a href=" . "boissons.php" . "?nom=" . $changenom . "> <li>" . $result[0] . "</li></a>";
+            echo '<tr> <td> <a href="boissons.php?nom='.$changenom.'">'.$result[0].'</a></td>
+                    <td> <button class="panier" type="button">Ajouter au panier</button> </td> </tr>';
         }
+        echo '</table>';
     }
 
     ?>
 </ul>
 </div>
+</main>
 </body>
 </html>
