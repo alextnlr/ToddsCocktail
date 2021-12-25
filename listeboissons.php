@@ -13,8 +13,7 @@
     require('include/bddActions.php')
 ?>
 
-<br> <br> <br>
-<form action="" method="get" name="">
+<form action="" method="get" name="searchbar">
     <table>
         <tr>
             <td><input type="text" name="k" placeholder="Search..." autocomplete="off"></td>

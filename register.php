@@ -1,15 +1,18 @@
+<html>
 <head>
     <meta charset="utf-8">
     <!-- importer le fichier de style -->
-    <link rel="stylesheet" href="../cssmain.css"/>
+    <link type="text/css" rel="stylesheet" href="cssmain.css"/>
 </head>
-<html>
 <body>
+<header>
+    <?php include "header.php" ?>
+</header>
 <div class="container">
-    <a href="../index.php">Retour à l'accueil</a>
+    <a href="index.php">Retour à l'accueil</a>
 
     <ul>
-    <form action="verifRegister.php" method="POST">
+    <form action="include/verifRegister.php" method="POST">
         <h1>Création de compte</h1>
 
         <li><label><b>Nom d'utilisateur : </b></label>

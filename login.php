@@ -6,13 +6,16 @@ https://waytolearnx.com/2020/01/formulaire-dauthentification-login-mot-de-passe-
 <head>
     <meta charset="utf-8">
     <!-- importer le fichier de style -->
-    <link rel="stylesheet" href="../cssmain.css" media="screen" type="text/css" />
+    <link rel="stylesheet" href="cssmain.css" media="screen" type="text/css" />
 </head>
 <body>
+<header>
+    <?php include "header.php" ?>
+</header>
 <div id="container">
     <!-- zone de connexion -->
 
-    <form action="veriflogin.php" method="POST">
+    <form action="include/veriflogin.php" method="POST">
         <h1>Connexion</h1>
 
         <label><b>Nom d'utilisateur</b></label>
