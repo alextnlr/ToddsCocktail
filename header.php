@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="cssmain.css"/>
 </head>
-
 <body>
 <div class="menu">
     <a class="btn active" href="index.php">Accueil</a>
     <a class="btn" href="listeboissons.php">Liste des Boissons</a>
     <a class="btn" href="listeingredients.php">Liste des Ingrédients</a>
+    <a class = "btn" href="favorite.php">Panier</a>
     <div class="compteGestionnaire">
 <?php
 session_start();
@@ -26,5 +26,3 @@ if ($_SESSION['username'] != "") {
 </div>
 
 </body>
-
-</html>
