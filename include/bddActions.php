@@ -1,8 +1,8 @@
 <?php
-function addCompte($login, $mdp, $nom) {
+function addCompte($login, $mdp, $nom, $prenom, $sexe, $mail, $dateNaissance, $id_adresse, $tel) {
     $conn = connectDb();
 
-    mysqli_query($conn, "INSERT INTO comptes(login, mdp, nom) VALUES('$login', '$mdp', '$nom')");
+    mysqli_query($conn, "INSERT INTO comptes(login, mdp, nom, prenom, sexe, mail, dateNaissance, id_adresse, tel) VALUES('$login', '$mdp', '$nom', '$prenom', '$sexe', '$mail', '$dateNaissance', '$id_adresse', '$tel')");
 }
 
 function checkCompte($login) {

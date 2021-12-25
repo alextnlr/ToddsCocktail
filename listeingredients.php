@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>BlegCocktail - Liste</title>
-    <link rel="stylesheet" href="../cssmain.css">
+    <link rel="stylesheet" href="cssmain.css">
 </head>
 <body>
 <header>
 <?php
-    include('../header.php');
+    include('header.php');
     $Recettes = null;
    // require('../Donnees.inc.php');
-    require('bddActions.php');
+    require('include/bddActions.php');
 ?>
 </header>
 <main>

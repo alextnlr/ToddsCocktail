@@ -23,6 +23,7 @@
     </table>
 </form>
 
+<div class="listeboissons">
 <ul>
     <?php
     $conn = connectDb();
@@ -57,5 +58,6 @@
 
     ?>
 </ul>
+</div>
 </body>
 </html>

@@ -17,7 +17,7 @@ include('header.php'); ?>
 //}else{
     echo "<h1> Bienvenue sur Todds Cocktail</h1>";
     echo "<p><a href='listeboissons.php'>Ici</a>, vous pourrez retrouvez une sélection de nos meilleurs recettes</p>";
-    echo "<p>Vous pouvez également chercher des recettes par leurs ingrédients, en se rendant sur <a href='include/listeingredients.php'>cette page</a></p>";
+    echo "<p>Vous pouvez également chercher des recettes par leurs ingrédients, en se rendant sur <a href='listeingredients.php'>cette page</a></p>";
 //}
 
 ?>

@@ -3,8 +3,10 @@
     <!-- importer le fichier de style -->
     <link rel="stylesheet" href="../cssmain.css"/>
 </head>
+<html>
 <body>
-<div id="container">
+<div class="container">
+    <a href="../index.php">Retour à l'accueil</a>
 
     <ul>
     <form action="verifRegister.php" method="POST">
@@ -17,19 +19,26 @@
             <input type="password" placeholder="Entrer le mot de passe" name="password" required></li>
 
         <li><label>Nom de Famille : </label>
-            <input type="text" placeholder="Entrer le nom de famille" name="surname" required></li>
+            <input type="text" placeholder="Entrer le nom de famille" name="surname" ></li>
 
         <li><label>Prénom : </label>
-            <input type="text" placeholder="Entrer prenom" name="name" required></li>
+            <input type="text" placeholder="Entrer prenom" name="name"></li>
 
         <li><label>Genre : </label>
         <select name="genre">
+            <option selected disabled></option>
             <option value="homme">Homme</option>
-            <option selected></option>
             <option value="femme">Femme</option>
             <option value="autre">Autre</option>
         </select>
         </li>
+        <li><label>Adresse e-mail :</label>
+        <input type="email" placeholder="Entrer email" name="mail"></li>
+
+        <li><label>Date de Naissance</label> <input type="date" name="birthdate"></li>
+        <li><label>Adresse et Ville: </label> <input type="text" placeholder="Adresse " name="address"></li>
+        <li><label>Numéro de Téléphone : </label><input type="tel" name="tel"></li>
+
 
         <li><input type="submit" id='submit' value='REGISTER' ></li>
 

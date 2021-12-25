@@ -10,7 +10,7 @@
 <div class="menu">
     <a class="active" href="index.php">Accueil</a>
     <a href="listeboissons.php">Liste des Boissons</a>
-    <a href="include/listeingredients.php">Liste des Ingrédients</a>
+    <a href="listeingredients.php">Liste des Ingrédients</a>
     <div class="compteGestionnaire">
 <?php
 session_start();

@@ -32,3 +32,32 @@ body {
 .menu .compteGestionnaire {
     float: right;
 }
+
+.container ul{
+    list-style-type: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+
+html{
+    background-color: #EAEAEA;
+}
+
+.listeboissons a{
+    font-size: 150%;
+    list-style-type: none;
+    outline: none;
+    text-decoration: none;
+    color: black;
+}
+
+.listeboissons a:hover{
+    color: #3e4f3a;
+    font-size: 155%;
+}
+
+.listeboissons a:focus{
+    color: #3e4f3a;
+    font-size: 155%;
+}
