@@ -11,3 +11,5 @@ if ($_SESSION['username'] != "") {
     mysqli_query($conn, "INSERT INTO panier(login, id_recette) VALUES ('$user', '$id[0]')");
     header('Location: ../listeboissons.php');
 }
+
+header('Location: ../listeboissons.php');
