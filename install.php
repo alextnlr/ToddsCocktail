@@ -25,9 +25,11 @@ if (!$connBd) {
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.ingredients (id_recette INT, id_ingredient INT, nom_ingredient TEXT, PRIMARY KEY (id_recette, id_ingredient), FOREIGN KEY(id_recette) REFERENCES recettes(id_recette));");
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.adressePostale (id_adresse INT PRIMARY KEY, adresse TEXT NOT NULL, codePostal NUMBER(5) NOT NULL, ville TEXT NOT NULL)");
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.comptes (login TEXT PRIMARY KEY, mdp TEXT NOT NULL, nom TEXT, prenom TEXT, nom TEXT, sexe NUMBER(1), mail TEXT, dateNaissance TEXT, id_adresse INT, tel NUMBER(10))");
-    mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.hierarchy (ingredient VARCHAR(50), sous_categorie VARCHAR(50), PRIMARY KEY (ingredient, sous_categorie));");
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.panier(login VARCHAR(150), id_recette INT, PRIMARY KEY (login, id_recette), FOREIGN KEY (login) REFERENCES comptes(login), FOREIGN KEY (id_recette) REFERENCES recettes(id_recette));");
+    mysqli_query($conn, "CREATE TABLE IF NOT EXISTS categories (id_category INT NOT NULL PRIMARY KEY, nom_category TEXT NOT NULL);");
+    mysqli_query($conn, "CREATE TABLE IF NOT EXISTS category_rel (id_category INT NOT NULL, pid_category INT NOT NULL, PRIMARY KEY (id_category, pid_category), FOREIGN KEY (id_category) REFERENCES categories (id_category), FOREIGN KEY (pid_category) REFERENCES categories (id_category));");
 
+    //Remplissage des recettes et ingredients
     for ($i = 0; $i < count($Recettes); $i++){
         $id = $i;
         $aled = mysqli_query($conn, "SELECT 1 FROM recettes WHERE id_recette = ".$id);
@@ -45,20 +47,25 @@ if (!$connBd) {
         }
     }
 
+    //Remplissage de la hierarchie
     $HierarKey = array_keys($Hierarchie);
-    for ($i = 0; $i < count($Hierarchie); $i++) {
-        foreach ($Hierarchie[$HierarKey[$i]]['sous-categorie'] as &$value) {
-            if (mysqli_query($conn, "SELECT 1 FROM toddscocktail_boissons.hierarchy WHERE ingredient = '$HierarKey[$i]' AND sous_categorie = '$value'")->fetch_row() == null) {
-                mysqli_query($conn, "INSERT INTO toddscocktail_boissons.hierarchy(ingredient, sous_categorie) VALUES ('$HierarKey[$i]', '$value')");
-            }
+    for ($i = 0; $i < count($HierarKey); $i++) {
+        $nom = mysqli_real_escape_string($conn, $HierarKey[$i]);
+        if (mysqli_query($conn, "SELECT 1 FROM categories WHERE nom_category = '$nom'")->num_rows == 0) {
+            mysqli_query($conn, "INSERT INTO categories(id_category, nom_category) VALUES ('$i', '$nom')");
         }
-
-        foreach ($Hierarchie[$HierarKey[$i]]['super-categorie'] as &$value) {
-            if (mysqli_query($conn, "SELECT 1 FROM toddscocktail_boissons.hierarchy WHERE ingredient = '$value' AND sous_categorie = '$HierarKey[$i]'")->fetch_row() == null) {
-                mysqli_query($conn, "INSERT INTO toddscocktail_boissons.hierarchy(ingredient, sous_categorie) VALUES ('$value', '$HierarKey[$i]')");
-            }
-        }
-
-        unset($value);
     }
+
+    foreach ($Hierarchie as $value1) {
+        foreach ($value1['super-categorie'] as $value) {
+            $i = array_search(array_search($value1, $Hierarchie), $HierarKey);
+            $pi = array_search($value, $HierarKey);
+            if (mysqli_query($conn, "SELECT 1 FROM category_rel WHERE id_category = '$i' AND pid_category = '$pi'")->num_rows == 0) {
+                mysqli_query($conn, "INSERT INTO category_rel(id_category, pid_category) VALUES ('$i', '$pi')");
+                echo $conn->error;
+            }
+        }
+    }
+
 }
+
