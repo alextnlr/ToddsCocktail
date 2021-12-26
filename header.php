@@ -1,8 +1,5 @@
 <?php
-if (!isset($_COOKIE['favorite'])) {
-    echo "pute";
-    setcookie('favorite', 0);
-}
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,7 +16,6 @@ if (!isset($_COOKIE['favorite'])) {
     <a class = "btn" href="favorite.php">Panier</a>
     <div class="compteGestionnaire">
 <?php
-session_start();
 if ($_SESSION['username'] != "") {
     $user = $_SESSION['username'];
     echo "<a class='btn' href='include/logout.php'> Déconnexion </a>";

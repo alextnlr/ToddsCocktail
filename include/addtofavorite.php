@@ -11,10 +11,9 @@ if ($_SESSION['username'] != "") {
     mysqli_query($conn, "INSERT INTO panier(login, id_recette) VALUES ('$user', '$id[0]')");
     header('Location: ../listeboissons.php');
 } else{
-    $current = $_COOKIE['favorite'];
-    $current = $current.$id[0];
-    setcookie('favorite', $current);
-    echo $_COOKIE['favorite'];
+    $current = $_SESSION['favorite'];
+    $current = $current."|".$id[0];
+    $_SESSION['favorite'] = $current;
 
 }
 
