@@ -21,11 +21,15 @@ include 'Donnees.inc.php';
 if (!$connBd) {
     mysqli_query($conn, "CREATE DATABASE toddscocktail_boissons");
 
+    /// Création de toutes les tables
+    // Gestion des recette
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.recettes (id_recette INT PRIMARY KEY, titre TEXT, ingredients TEXT, preparation TEXT);");
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.ingredients (id_recette INT, id_ingredient INT, nom_ingredient TEXT, PRIMARY KEY (id_recette, id_ingredient), FOREIGN KEY(id_recette) REFERENCES recettes(id_recette));");
+    // Gestion des comptes
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.adressePostale (id_adresse INT PRIMARY KEY, adresse TEXT NOT NULL, codePostal NUMBER(5) NOT NULL, ville TEXT NOT NULL)");
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.comptes (login TEXT PRIMARY KEY, mdp TEXT NOT NULL, nom TEXT, prenom TEXT, nom TEXT, sexe NUMBER(1), mail TEXT, dateNaissance TEXT, id_adresse INT, tel NUMBER(10))");
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS toddscocktail_boissons.panier(login VARCHAR(150), id_recette INT, PRIMARY KEY (login, id_recette), FOREIGN KEY (login) REFERENCES comptes(login), FOREIGN KEY (id_recette) REFERENCES recettes(id_recette));");
+    //Gestion de la hierarchie
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS categories (id_category INT NOT NULL PRIMARY KEY, nom_category TEXT NOT NULL);");
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS category_rel (id_category INT NOT NULL, pid_category INT NOT NULL, PRIMARY KEY (id_category, pid_category), FOREIGN KEY (id_category) REFERENCES categories (id_category), FOREIGN KEY (pid_category) REFERENCES categories (id_category));");
 
@@ -47,7 +51,7 @@ if (!$connBd) {
         }
     }
 
-    //Remplissage de la hierarchie
+    //Remplissage des categories
     $HierarKey = array_keys($Hierarchie);
     for ($i = 0; $i < count($HierarKey); $i++) {
         $nom = mysqli_real_escape_string($conn, $HierarKey[$i]);
@@ -56,6 +60,7 @@ if (!$connBd) {
         }
     }
 
+    //Remplissage des liens entre categories (super categories)
     foreach ($Hierarchie as $value1) {
         foreach ($value1['super-categorie'] as $value) {
             $i = array_search(array_search($value1, $Hierarchie), $HierarKey);
