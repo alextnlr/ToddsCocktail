@@ -35,10 +35,12 @@
     //S'il y a des choses dans la bar de recherche
     if (isset($_GET['k']) && $_GET['k']) {
         $k = trim($_GET['k']); //Enleve les double spaces
-        $keywords = explode(' ', $k); //Separatiojn dans un tableau des mots cles
+        $keywords = explode(' ', $k); //Separation dans un tableau des mots cles
+
+        $keywords = getHierarchyKey($keywords);
 
         //Debut de la requete avec jointure
-        $queryRequest = "SELECT DISTINCT titre FROM recettes LEFT JOIN ingredients i on recettes.id_recette = i.id_recette";
+        $queryRequest = "SELECT DISTINCT titre FROM recettes LEFT JOIN ingredients i on recettes.id_recette = i.id_recette WHERE ";
         foreach ($keywords as $word) {
             //Recherche de chaque mots cle dans le titre ou les ingredients
             $queryRequest .= " nom_ingredient LIKE '%".$word."%' OR titre LIKE '%".$word."%' OR ";
@@ -54,7 +56,7 @@
             while ($result = $query->fetch_row()) {
                 $changenom = str_replace(' ', '_', $result[0]);
                 echo '<tr> <td> <a href="boissons.php?nom='.$changenom.'">'.$result[0].'</a></td>
-                    <td> <form action="include/addtofavorite.php?nom='.$changenom.'" method="post"><input class="panier" type="submit">Ajouter au panier</input> </form></td> </tr>';
+                    <td> <form action="include/addtofavorite.php?nom='.$changenom.'" method="post"><button class="panier" type="submit">Ajouter au panier</button> </form></td> </tr>';
             }
             echo '</table>';
         } else {

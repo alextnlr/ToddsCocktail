@@ -24,6 +24,24 @@ function tryConnexion($login, $mdp) {
     return password_verify($mdp, $row["mdp"]);
 }
 
+function getHierarchyKey($keywords) {
+    $n = 0;
+    $conn = connectDb();
+    while(count($keywords) != $n) {
+        $n = count($keywords);
+        for ($i = 0; $i < $n; $i++) {
+            $word = mysqli_real_escape_string($conn, $keywords[$i]);
+            $result = mysqli_query($conn, "SELECT c2.nom_category FROM categories c2 WHERE c2.id_category IN (SELECT cr.id_category FROM category_rel cr, categories c WHERE cr.pid_category = c.id_category AND c.nom_category LIKE '%".$word."%');");
+            while ($name = $result->fetch_row()) {
+                if (!in_array($name[0], $keywords)) {
+                    $keywords[] = $name[0];
+                }
+            }
+        }
+    }
+    return $keywords;
+}
+
 function connectDb() {
     $servername = 'mysql-toddscocktail.alwaysdata.net';
     $username = '251063';
