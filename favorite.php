@@ -18,7 +18,6 @@
 require("include/bddActions.php");
 
 session_start();
-
 $favorite = array(); // Array des ID des favoris
 
 // Récupération des ID si la personne est connectée
@@ -43,7 +42,7 @@ if ($_SESSION['username']) {
     echo $_SESSION['favorite']."</br>";
     $favorite = explode("|", $_SESSION['favorite']);
     echo "<table>";
-    for ($i = 1; $i<sizeof($favorite); $i++){
+    for ($i = 1; $i<sizeof($favorite) - 1; $i++){
         $currentId = mysqli_query($conn, "SELECT r.titre FROM recettes r WHERE id_recette='$favorite[$i]'");
         $name = $currentId->fetch_row()[0];
         $replaceName = str_replace(' ', '_', $name);

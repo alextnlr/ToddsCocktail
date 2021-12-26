@@ -12,8 +12,16 @@ if ($_SESSION['username'] != "") {
     header('Location: ../listeboissons.php');
 } else{
     $current = $_SESSION['favorite'];
-    $current = $current."|".$id[0];
-    $_SESSION['favorite'] = $current;
+    if (strlen($current) == 0){
+        $current = "|";
+    }
+    $test = "|".$id[0]."|";
+
+    //Obligé de vérifier les types, pour éviter l'assimilation 0 = false
+    if (gettype(strpos($current, $test)) == "boolean") {
+        $current = $current.$id[0]."|";
+        $_SESSION['favorite'] = $current;
+    }
 
 }
 
